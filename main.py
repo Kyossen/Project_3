@@ -27,16 +27,8 @@ if __name__ == "__main__":
     else:
         gui = Game_GUI(maze, gamemanager.list_item_class)
         gui.on_loop_game()
-
-    
-    
-            #Tableaux adouble dimensions (liste les unes dans les autres)
-        #Corriger fautes
-        #Définir les classes dans la partie algorithme les classes
-        #Basé l'algo sur chaque classe gràace aux positions
+        
         #Diapo pour la soutenance
         #Nom du projet avec nom et parcours
         #Trois points (labyrinth, fichier editable)
         #Trois icones pycharm, pygame, python
-        #PowerPoint
-        #Keynote
