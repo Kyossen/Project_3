@@ -1,22 +1,23 @@
 # usr/env/bin Python3.4
 # coding:utf-8
 
-# Import file
-from Player import *
-from Item import *
-
 # Import Lib
 import random
 import sys
 
+# Import file
+from Player import Player
+from Item import Item
+
+
 class GameManager:
 
-    # Init the player and the maze
     def __init__(self, maze):
+        """ Init the player and the maze """
         self.maze = maze
         self.player = Player(self.maze.get_player_position())
 
-        # Find the positions empty for the spawn of items and add this positions in list for spawn
+        # Find the positions empty for the spawn of items
         spaces = self.maze.get_all_positions(" ")
         list_items = ['G', 'H', 'I']
         self.list_item_class = []
@@ -28,9 +29,9 @@ class GameManager:
         for spawn_item in self.list_item_class:
             self.maze.spawn_item(spawn_item)
 
-    # Create a loop for playing, print and manage this game
     def start_game(self):
-        # This is a rappel for move commands
+        """ Create a loop for playing, print and manage this game
+         This is a rappel for move commands """
         print("Commands for playing the maze game:")
         print("Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft|")
         while self.player != "E":
@@ -39,7 +40,7 @@ class GameManager:
             new_position = self.player.move_player()
 
             # Check if player in the maze or out
-            if self.maze.true_or_false_pos(new_position) == True:
+            if self.maze.true_or_false_pos(new_position) is True:
                 new_symbol = self.maze.get_symbol_at_position(new_position)
             else:
                 new_symbol = None
@@ -60,11 +61,11 @@ class GameManager:
                 else:
                     print("Your is Dead...")
                     sys.exit()
-            # If new symbol isn't items, endgame or a empty position, I replace my position to old position
+            # If new symbol is a wall, so I replace my position to old position
             else:
                 self.player.rollback()
 
             # I writ on my old position a empty position for don't clone player
-            if new_symbol != "x" and new_symbol != None:
+            if new_symbol != "x" and new_symbol is not None:
                 old_position = self.player.old_position
                 self.maze.writ_symbol(old_position, " ")
