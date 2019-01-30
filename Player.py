@@ -3,6 +3,7 @@
 
 move_player_True = True
 
+
 class Player:
 
     def __init__(self, position):
@@ -34,24 +35,23 @@ class Player:
 
             # The variable below is use for get the old position of the player
             self.old_position = self.x, self.y
-            
             user = input("")
             # Keys for move player in terminal
             if user == "d":
                 self.moveRight()
-                print("Commands: Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft|")
+                print("Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft")
                 return self.x, self.y
             if user == "z":
                 self.moveUp()
-                print("Commands: Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft|")
+                print("Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft")
                 return self.x, self.y
             if user == "q":
                 self.moveLeft()
-                print("Commands: Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft|")
+                print("Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft")
                 return self.x, self.y
             if user == "s":
                 self.moveDown()
-                print("Commands: Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft|")
+                print("Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft")
                 return self.x, self.y
 
     def rollback(self):
