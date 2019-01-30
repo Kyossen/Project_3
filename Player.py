@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Create variable for move loop
 move_player_True = True
 
 class Player:
 
-    # Init the player with inventory and positions
     def __init__(self, position):
+        """Init the player with inventory and positions"""
         self.x = position[0]
         self.y = position[1]
         self.stock = []
@@ -16,8 +15,8 @@ class Player:
     player = 0
     speed = 1
 
-    # Create of the methods for move player
     def moveRight(self):
+        """Create of the methods for move player"""
         self.x = self.x + self.speed
 
     def moveLeft(self):
@@ -29,8 +28,8 @@ class Player:
     def moveDown(self):
         self.y = self.y + self.speed
 
-    # Create of the loop for move the player
     def move_player(self):
+        """Create of the loop for move the player"""
         while move_player_True:
 
             # The variable below is use for get the old position of the player
@@ -55,11 +54,11 @@ class Player:
                 print("Commands: Z -> moveUp|S -> moveDown|D -> moveRight|Q -> moveLeft|")
                 return self.x, self.y
 
-    # Replace player position to old player position
     def rollback(self):
+        """Replace player position to old player position"""
         self.x = self.old_position[0]
         self.y = self.old_position[1]
 
-    # Create of the method for add items in inventory
     def add_item(self, stock):
+        """Create of the method for add items in inventory"""
         self.stock.append(stock)
