@@ -1,6 +1,12 @@
 # usr/env/bin Python3.4
 # coding:utf-8
 
+"""
+Import these modules for a good use of the program
+Platform module for the program to know which bone is used
+Pygame for the creation and management of a graphical interface
+Player to manage and control the player
+"""
 # Import Lib
 import platform
 
@@ -27,6 +33,10 @@ class CharactereSprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
     def move(self, new_pos):
+        """
+        This method is used to control the movement
+        of the player and the position of the sprite (40 x 40)
+        """
         player_pos = 40
         self.rect.x = new_pos[0] * player_pos
         self.rect.y = new_pos[1] * player_pos
@@ -88,7 +98,7 @@ class Game_GUI:
         self.sprite_player.move(pos)
 
     def draw_npc(self):
-        """Draw Guard"""
+        """Draw Guard and manage their positions"""
         self.npc = self.maze.get_all_positions("E")
         for draw in self.npc:
             npc_sprite = CharactereSprite(self.img_npc)
@@ -97,7 +107,7 @@ class Game_GUI:
             self.character_sprites_list.add(npc_sprite)
 
     def draw_wall(self):
-        """Draw walls"""
+        """Draw walls and manage their positions"""
         self.walls = self.maze.get_all_positions("x")
         for draw in self.walls:
             wall_sprite = WallSprite(self.img_walls)
@@ -161,7 +171,8 @@ class Game_GUI:
                     self.player.moveDown()
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
                     self.player.moveLeft()
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
+                if event.type == pygame.KEYDOWN and event.key \
+                        == pygame.K_RIGHT:
                     self.player.moveRight()
                 break
             self.new_position = self.player.x, self.player.y
@@ -180,11 +191,13 @@ class Game_GUI:
                     self.rollback()
 
                 # Check the new symbol for get items
-                if self.new_symbol == "G" or self.new_symbol == "H" or self.new_symbol == "I":
+                if self.new_symbol == "G" or self.new_symbol == "H" \
+                        or self.new_symbol == "I":
                     # Pick up the item and move the item to the right position
                     for idx, item in enumerate(self.items):
-                        if self.new_position[0] == item.x and self.new_position[1]\
-                                == item.y and item.pickup is not True:
+                        if self.new_position[0] == item.x and \
+                                self.new_position[1] == item.y and \
+                                item.pickup is not True:
                             # The right position is calcu a each round of loop
                             self.sprite_items[idx].rect.x = 565
                             self.sprite_items[idx].rect.y = \
