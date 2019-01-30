@@ -1,6 +1,11 @@
 # usr/env/bin Python3.4
 # coding:utf-8
 
+"""
+Import this modules for a good use of the program
+Sys only for endgame and Random for print items
+Player for control of the gamer and Item for manage a items
+"""
 # Import Lib
 import random
 import sys
@@ -11,7 +16,6 @@ from Item import Item
 
 
 class GameManager:
-
     def __init__(self, maze):
         """ Init the player and the maze """
         self.maze = maze
