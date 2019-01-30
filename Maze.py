@@ -1,19 +1,18 @@
 # usr/env/bin Python3.4
 # coding:utf-8
 
+#Import Lib
+import sys
+
 # Import file
 from Gamemanager import GameManager
 from Player import Player
 from Item import Item
 
-#Import Lib
-import sys
-
-# Create class for Maze
 class Maze():
 
-    # Init
     def __init__(self, filename):
+        """ Init the constructor  for read the file to generate the maze """
         with open(filename) as f:
             file = f.read()
 
@@ -52,8 +51,8 @@ class Maze():
     def __repr__(self):
         return "\n".join("".join(row) for row in self.maze)
 
-    # Return the startup position for the player
     def get_player_position(self):
+        """ Return the startup position for the player """
         x = 0
         y = 0
         for line in self.maze:
@@ -64,8 +63,8 @@ class Maze():
             y = y+1
             x = 0
 
-    # Return all positions for print the  symbol (wall, items, etc...)
     def get_all_positions(self, symbol):
+        """ Return all positions for print the  symbol (wall, items, etc...) """
         positions = []
         x = 0
         y = 0
@@ -78,11 +77,9 @@ class Maze():
             x = 0
         return positions
 
-    """
-    Check len x and len y in the maze.
-    This method below is use for check that the gamer is in the maze and isn't out.
-    """
     def true_or_false_pos(self, position):
+        """ Check len x and len y in the maze.
+            This method below is use for check that the gamer is in the maze and isn't out. """
         max_x = len(self.maze)
         max_y = len(self.maze[0])
         if position[1] >= max_x:
@@ -92,15 +89,15 @@ class Maze():
         else:
             return True
 
-    # Return the symbol of the position the player
     def get_symbol_at_position(self, position):
+        """ Return the symbol of the position the player """
         get_symbol = self.maze[position[1]][position[0]]
         return get_symbol
 
-    # Write a symbol at position the player
     def writ_symbol(self, position, symbol):
+        """ Write a symbol at position the player """
         self.maze[position[1]][position[0]] = symbol
 
-    #Write a symbol on a random position who is selects with the method get_spaces.
     def spawn_item(self, item):
+        """ Write a symbol on a random position who is selects with the method get_spaces. """
         self.maze[item.y][item.x] = item.symbol
