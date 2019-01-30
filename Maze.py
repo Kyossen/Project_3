@@ -49,6 +49,7 @@ class Maze():
                 sys.exit()
 
     def __repr__(self):
+        """Use join for separate the elements"""
         return "\n".join("".join(row) for row in self.maze)
 
     def get_player_position(self):
