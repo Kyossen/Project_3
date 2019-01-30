@@ -1,13 +1,9 @@
 # usr/env/bin Python3.4
 # coding:utf-8
 
-#Import Lib
+# Import Lib
 import sys
 
-# Import file
-from Gamemanager import GameManager
-from Player import Player
-from Item import Item
 
 class Maze():
 
@@ -64,7 +60,7 @@ class Maze():
             x = 0
 
     def get_all_positions(self, symbol):
-        """ Return all positions for print the  symbol (wall, items, etc...) """
+        """Return all positions for print the  symbol (wall, items, etc...)"""
         positions = []
         x = 0
         y = 0
@@ -78,8 +74,9 @@ class Maze():
         return positions
 
     def true_or_false_pos(self, position):
-        """ Check len x and len y in the maze.
-            This method below is use for check that the gamer is in the maze and isn't out. """
+        """Check len x and len y in the maze
+        This method below is use for check that
+        the gamer is in the maze and isn't out"""
         max_x = len(self.maze)
         max_y = len(self.maze[0])
         if position[1] >= max_x:
@@ -90,14 +87,14 @@ class Maze():
             return True
 
     def get_symbol_at_position(self, position):
-        """ Return the symbol of the position the player """
+        """Return the symbol of the position the player"""
         get_symbol = self.maze[position[1]][position[0]]
         return get_symbol
 
     def writ_symbol(self, position, symbol):
-        """ Write a symbol at position the player """
+        """Write a symbol at position the player"""
         self.maze[position[1]][position[0]] = symbol
 
     def spawn_item(self, item):
-        """ Write a symbol on a random position who is selects with the method get_spaces. """
+        """Select a random position then write a symbol"""
         self.maze[item.y][item.x] = item.symbol
