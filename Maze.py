@@ -1,6 +1,10 @@
 # usr/env/bin Python3.4
 # coding:utf-8
 
+"""
+Import this modules for a good use of the program
+Use sys only for be sure that the letters to start game there present
+"""
 # Import Lib
 import sys
 
