@@ -2,22 +2,26 @@
 # coding:utf-8
 
 # Import Lib
-from pygame.locals import *
-import pygame
 import platform
 
+# Import module
+from pygame.locals import *
+import pygame
+
 # Import file
-from Player import *
+from Player import Player
 from Maze import Maze
 from Item import Item
 
 class WallSprite(pygame.sprite.Sprite):
+    """Create a class for manage the character sprites"""
     def __init__(self, image):
         super().__init__()
         self.image = image
         self.rect = self.image.get_rect()
 
 class CharactereSprite(pygame.sprite.Sprite):
+    """Create a class for manage the player sprite"""
     def __init__(self, image):
         super().__init__()
         self.image = image
@@ -30,8 +34,8 @@ class CharactereSprite(pygame.sprite.Sprite):
 
 class Game_GUI:
 
-    # Init the game
     def __init__(self, maze, items):
+        """Init the game"""
         pygame.init()
         self.windowWidth = 600
         self.windowHeight = 480
@@ -43,7 +47,7 @@ class Game_GUI:
         self.clock = pygame.time.Clock()
         self.running = True
 
-        # Init of the variables for conditions of endgame
+        # Init of the variable for the condition of endgame
         self.a = True
 
         # Init the pics for sprites and define user os of user
@@ -77,12 +81,13 @@ class Game_GUI:
         self.character_sprites_list.add([self.sprite_player])
         self.items_list_sprite.add(self.sprite_items)
 
-    # Get the position for the player and move player
     def draw_and_move_player(self):
+        """Get the position for the player and move player"""
         pos = self.player.x, self.player.y
         self.sprite_player.move(pos)
 
     def draw_npc(self):
+        """Draw Guard"""
         self.npc = self.maze.get_all_positions("E")
         for draw in self.npc:
             npc_sprite = CharactereSprite(self.img_npc)
@@ -91,6 +96,7 @@ class Game_GUI:
             self.character_sprites_list.add(npc_sprite)
 
     def draw_wall(self):
+        """Draw walls"""
         self.walls = self.maze.get_all_positions("x")
         for draw in self.walls:
             wall_sprite = WallSprite(self.img_walls)
@@ -98,8 +104,8 @@ class Game_GUI:
             wall_sprite.rect.y = draw[1] * 40
             self.wall_sprites_list.add(wall_sprite)
 
-    # Draw rect for inventory on side right
     def draw_inventory(self):
+        """Draw rect for inventory on side right"""
         white = (255, 255, 255)
         black = (0, 0, 0)
         pygame.draw.rect(self.screen, white, (565, 200, 40, 40), 0)
@@ -110,18 +116,19 @@ class Game_GUI:
         pygame.draw.rect(self.screen, black, (565, 280, 40, 40), 5)
 
     def draw_items(self):
+        """Draw Items on the map"""
         items = self.items
         for index, item in enumerate(items):
             self.sprite_items[index].rect.x = item.x * 40
             self.sprite_items[index].rect.y = item.y * 40
 
-    # Replace player position to old player position
     def rollback(self):
+        """Replace player position to old player position"""
         self.player.x = self.old_position[0]
         self.player.y = self.old_position[1]
 
-    # Print a party the game
     def draw_base(self):
+        """Print a party the game"""
         self.screen.blit(self.img_background, (0, 0))
         self.wall_sprites_list.draw(self.screen)
         self.draw_inventory()
@@ -132,8 +139,8 @@ class Game_GUI:
         self.character_sprites_list.update()
         self.character_sprites_list.draw(self.screen)
 
-    # Create a loop for playing, print and manage this game
     def on_loop_game(self):
+        """Create a loop for playing, print and manage this game"""
         self.draw_base()
         self.draw_wall()
         self.draw_items()
@@ -174,7 +181,7 @@ class Game_GUI:
                 if self.new_symbol == "G" or self.new_symbol == "H" or self.new_symbol == "I":
                     # Pick up the item and put it in inventory and move the sprite to the right position
                     for idx, item in enumerate(self.items):
-                        if self.new_position[0] == item.x and self.new_position[1] == item.y and item.pickup != True:
+                        if self.new_position[0] == item.x and self.new_position[1] == item.y and  item.pickup != True:
                             # The right position is calcul for each round of loop
                             self.sprite_items[idx].rect.x = 565
                             self.sprite_items[idx].rect.y = 200 + 40 * len(self.player.stock)
@@ -189,11 +196,10 @@ class Game_GUI:
                     else:
                         self.screen.blit(self.img_end_game, (0, 0))
 
-            """
-            This condition below is used for of the endgame
-            If self.a = True, so we refresh the screen
-            If self.a = False we keep the pics of the endgame 
-            """
+            # This condition below is used for of the endgame
+            # If self.a = True, so we refresh the screen
+            # If self.a = False we keep the pics of the endgame
+
             if self.a == True:
                 self.draw_base()
                 self.draw_and_move_player()
