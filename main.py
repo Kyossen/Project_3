@@ -1,6 +1,11 @@
 # usr/env/bin Python3.4
 # coding:utf-8
 
+"""
+Import these modules for a good use of the program
+Argparse to create a choice for the user
+All the other modules below are used to create a main file
+"""
 # Import Lib
 import argparse
 
